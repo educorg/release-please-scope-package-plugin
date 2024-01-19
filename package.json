@@ -1,0 +1,39 @@
+{
+  "name": "release-please-scope-package-plugin",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "author": {
+    "name": "Dmitriy",
+    "email": "sova123409@gmail.com"
+  },
+  "keywords": [
+    "release-please",
+    "plugin"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "prepare": "pnpm build"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "unbuild": "^2.0.0"
+  },
+  "peerDependencies": {
+    "release-please": "^16.0.0"
+  }
+}
