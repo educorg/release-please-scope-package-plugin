@@ -4,7 +4,6 @@
   "always-link-local": true,
   "bootstrap-sha": "41d6d8ac75049907f0865b5937d4ffb9b47bef59",
   "plugins": [
-    "node-workspace",
     "release-please-scope-package-plugin"
   ],
   "packages": {
