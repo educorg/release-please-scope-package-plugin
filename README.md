@@ -35,6 +35,14 @@ or
 release-please release-pr ... --plugin=release-please-scope-package-plugin
 ```
 
+## Использование
+
+Плагин ищет коммиты со `scope` уже имеющихся в конфиге пакетов (например для `apps/studwork-front` это `studwork`, название из `package.json`) вроде `fix(studwork/util): Some fix` и исключает подобные коммиты из остальные пакетов
+
+Для указания нескольких затронутых пакетов необходимо указывать их через запятую (прим. `fix(work24,studwork/util): Some fix`)
+
+Так же плагин работает с `multiline` коммитами, которые обычно появляются при `squash-merge`
+
 ## Идея
 
 Идея как создать плагин взята из [@ipfs-shipyard/release-please-ipfs-plugin](https://github.com/ipfs-shipyard/release-please-ipfs-plugin)
