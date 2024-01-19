@@ -9,7 +9,7 @@ import { type Update } from 'release-please/build/src/update'
 const commitRegex = /(?<prefix>\w+)\((?<scope>.+)\)(?<force>!?):/;
 
 export interface ScopePackagePluginConfig {
-  packages?: string[];
+
 }
 
 export class ScopePackagePlugin extends ManifestPlugin {
@@ -17,22 +17,9 @@ export class ScopePackagePlugin extends ManifestPlugin {
     github: GitHub,
     targetBranch: string,
     repositoryConfig: RepositoryConfig,
-    packages: ScopePackagePluginConfig['packages'],
   ) {
     super(github, targetBranch, repositoryConfig);
   }
-
-  // processCommits(commits: ConventionalCommit[]): ConventionalCommit[] {
-  //   this.logger.info('[ScopePackagePlugin] processCommites', commits);
-
-  //   return commits;
-  // }
-
-  // async run(pullRequests: CandidateReleasePullRequest[]): Promise<CandidateReleasePullRequest[]> {
-  //   this.logger.info('[ScopePackagePlugin] run', pullRequests)
-
-  //   return pullRequests;
-  // }
 
   async preconfigure(strategiesByPath: Record<string, Strategy>, commitsByPath: Record<string, Commit[]>, releasesByPath: Record<string, Release>): Promise<Record<string, Strategy>> {
     this.logger.info('[ScopePackagePlugin] Start analyze commits');

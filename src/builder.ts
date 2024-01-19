@@ -7,5 +7,4 @@ export const builder: PluginBuilder = (options) =>
     options.github,
     options.targetBranch,
     options.repositoryConfig,
-    (options.type as ScopePackagePluginConfig).packages,
   );
