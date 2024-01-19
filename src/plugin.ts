@@ -6,6 +6,8 @@ import { Release } from 'release-please/build/src/release';
 import { Strategy } from 'release-please/build/src/strategy';
 import { type Update } from 'release-please/build/src/update'
 
+const commitRegex = /(?<prefix>\w+)\((?<scope>.+)\)(?<force>!?):/;
+
 export interface ScopePackagePluginConfig {
   packages?: string[];
 }
@@ -20,20 +22,63 @@ export class ScopePackagePlugin extends ManifestPlugin {
     super(github, targetBranch, repositoryConfig);
   }
 
-  processCommits(commits: ConventionalCommit[]): ConventionalCommit[] {
-    this.logger.info('[ScopePackagePlugin] processCommites', commits);
+  // processCommits(commits: ConventionalCommit[]): ConventionalCommit[] {
+  //   this.logger.info('[ScopePackagePlugin] processCommites', commits);
 
-    return commits;
-  }
+  //   return commits;
+  // }
 
-  async run(pullRequests: CandidateReleasePullRequest[]): Promise<CandidateReleasePullRequest[]> {
-    this.logger.info('[ScopePackagePlugin] run', pullRequests)
+  // async run(pullRequests: CandidateReleasePullRequest[]): Promise<CandidateReleasePullRequest[]> {
+  //   this.logger.info('[ScopePackagePlugin] run', pullRequests)
 
-    return pullRequests;
-  }
+  //   return pullRequests;
+  // }
 
-  async preconfigure(strategiesByPath: Record<string, Strategy>, _commitsByPath: Record<string, Commit[]>, _releasesByPath: Record<string, Release>): Promise<Record<string, Strategy>> {
-    this.logger.info('[ScopePackagePlugin] preconfigure', strategiesByPath, _commitsByPath, _releasesByPath);
+  async preconfigure(strategiesByPath: Record<string, Strategy>, commitsByPath: Record<string, Commit[]>, releasesByPath: Record<string, Release>): Promise<Record<string, Strategy>> {
+    this.logger.info('[ScopePackagePlugin] Start analyze commits');
+
+    const components: string[] = [];
+    Object.values(releasesByPath).forEach((release) => {
+      const { component } = release.tag;
+
+      components.push(component);
+    });
+
+    Object.entries(commitsByPath).forEach(([path, commits]) => {
+      const { component } = releasesByPath[path].tag;
+      const commitIndexesForDeletion = [];
+
+      commits.forEach((commit, index) => {
+        const commitMatch = commit.message.match(commitRegex);
+
+        if (commitMatch) {
+          const {
+            prefix,
+            scope,
+            force,
+          } = commitMatch.groups;
+
+          const firstScope = scope.split('/')[0];
+          const affectedComponents = firstScope
+            .split(',')
+            .filter((component) => components.includes(component));
+
+          // Если на компонент не повлиял коммит, удаляем коммит из его списка
+          if (affectedComponents.length && !affectedComponents.includes(component)) {
+            commitIndexesForDeletion.push(index);
+          }
+        }
+      });
+
+      // Разворачиваем массив, чтобы удалять с конца и не ломать индексы
+      commitIndexesForDeletion.reverse();
+      commitIndexesForDeletion.forEach((index) => {
+        const commit = commits[index];
+
+        this.logger.info(`[ScopePackagePlugin] Remove commit "${commit.message}" ${commit.sha} from ${component}`);
+        commits.splice(index, 1);
+      });
+    });
 
     return strategiesByPath;
   }
