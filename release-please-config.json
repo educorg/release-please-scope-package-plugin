@@ -9,7 +9,6 @@
   "packages": {
     "apps/studwork-front": {},
     "apps/work24-front": {},
-    "packages/shared-front": {},
-    ".": {}
+    "packages/shared-front": {}
   }
 }
