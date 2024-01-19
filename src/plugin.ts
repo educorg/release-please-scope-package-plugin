@@ -24,6 +24,8 @@ export class ScopePackagePlugin extends ManifestPlugin {
   async preconfigure(strategiesByPath: Record<string, Strategy>, commitsByPath: Record<string, Commit[]>, releasesByPath: Record<string, Release>): Promise<Record<string, Strategy>> {
     this.logger.info('[ScopePackagePlugin] Start analyze commits');
 
+    // Получаем список всех названий пакетов
+    // чтобы далее по ним фильтровать коммиты
     const components: string[] = [];
     Object.values(releasesByPath).forEach((release) => {
       const { component } = release.tag;
@@ -35,6 +37,7 @@ export class ScopePackagePlugin extends ManifestPlugin {
       const { component } = releasesByPath[path].tag;
       const commitIndexesForDeletion = [];
 
+      // Обходим коммиты каждого пакета и удаляем те, что не повлияли на текущее пакет
       commits.forEach((commit, index) => {
         const commitMatch = commit.message.match(commitRegex);
 
