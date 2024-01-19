@@ -1,5 +1,6 @@
 {
   "apps/studwork-front": "0.0.1",
   "apps/work24-front": "0.0.1",
-  "packages/shared-front": "0.0.1"
+  "packages/shared-front": "0.0.1",
+  ".": "0.0.0"
 }
