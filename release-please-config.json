@@ -1,0 +1,10 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "release-type": "node",
+  "always-link-local": true,
+  "packages": {
+    "apps/studwork-front": {},
+    "apps/work24-front": {},
+    "packages/shared-front": {}
+  }
+}
