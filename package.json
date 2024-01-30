@@ -31,7 +31,7 @@
   ],
   "devDependencies": {
     "typescript": "^5.3.3",
-    "unbuild": "^2.0.0"
+    "unbuild": "^1.2.01"
   },
   "peerDependencies": {
     "release-please": "^16.0.0"
