@@ -1,6 +1,6 @@
 import { Commit, ConventionalCommit } from 'release-please/build/src/commit';
-import { GitHub } from 'release-please/build/src/github'
-import { RepositoryConfig } from 'release-please/build/src/manifest'
+import { type GitHub } from 'release-please/build/src/github'
+import { type RepositoryConfig } from 'release-please/build/src/manifest'
 import { ManifestPlugin } from 'release-please/build/src/plugin'
 import { Release } from 'release-please/build/src/release';
 import { Strategy } from 'release-please/build/src/strategy';

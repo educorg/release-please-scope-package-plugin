@@ -1,6 +1,6 @@
-import { PluginBuilder } from 'release-please/build/src/factories/plugin-factory';
+import type { PluginBuilder } from 'release-please/build/src/factories/plugin-factory';
 
-import { ScopePackagePlugin, ScopePackagePluginConfig } from './plugin';
+import { ScopePackagePlugin, type ScopePackagePluginConfig } from './plugin';
 
 export const builder: PluginBuilder = (options) =>
   new ScopePackagePlugin(
