@@ -23,7 +23,7 @@
   ],
   "scripts": {
     "build": "unbuild",
-    "prepare": "ls && pnpm build"
+    "prepare": "unbuild"
   },
   "files": [
     "src",
@@ -31,7 +31,7 @@
   ],
   "devDependencies": {
     "typescript": "^5.3.3",
-    "unbuild": "^1.2.01"
+    "unbuild": "^2.0.0"
   },
   "peerDependencies": {
     "release-please": "^16.0.0"
