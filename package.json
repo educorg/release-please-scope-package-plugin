@@ -23,11 +23,12 @@
   ],
   "scripts": {
     "build": "unbuild",
-    "prepare": "pnpm build"
+    "prepare": "ls && pnpm build"
   },
   "files": [
     "src",
-    "dist"
+    "dist",
+    "tsconfig.json"
   ],
   "devDependencies": {
     "typescript": "^5.3.3",
