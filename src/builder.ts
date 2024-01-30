@@ -1,4 +1,4 @@
-import { type PluginBuilder } from 'release-please/build/src/factories/plugin-factory';
+import type { PluginBuilder } from 'release-please/build/src/factories/plugin-factory';
 
 import { ScopePackagePlugin, type ScopePackagePluginConfig } from './plugin';
 

@@ -23,7 +23,7 @@
   ],
   "scripts": {
     "build": "unbuild",
-    "prepare": "pnpm build"
+    "prepare": "unbuild"
   },
   "files": [
     "src",
