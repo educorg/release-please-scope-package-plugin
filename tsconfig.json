@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "CommonJS",
-    "isolatedModules": true
+    "module": "ESNext",
+    "moduleResolution": "Node"
   },
   "include": [
     "src"
