@@ -49,6 +49,7 @@ export class ScopePackagePlugin extends ManifestPlugin {
       const firstScope = scope.split('/')[0];
       return firstScope
         .split(',')
+        .map(str => str.trim())
         .filter((component) => components.includes(component));
     };
 
