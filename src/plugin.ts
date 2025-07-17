@@ -54,6 +54,9 @@ export class ScopePackagePlugin extends ManifestPlugin {
     };
 
     Object.entries(commitsByPath).forEach(([path, commits]) => {
+      // Релиза для этого пакета еще не было
+      if (!releasesByPath[path]) return;
+
       const { component } = releasesByPath[path].tag;
       const commitIndexesForDeletion = [];
 
